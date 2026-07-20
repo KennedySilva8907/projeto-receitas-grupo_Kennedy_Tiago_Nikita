@@ -17,9 +17,9 @@ Este projeto tem como objetivo criar uma página colaborativa com receitas compa
 - Nikita Slobodeniuc
 
 ## Receitas 
-- [Bolo de Cenoura](src/bolo-de-cenoura.md) 
-- [Bacalhau à Brás](src/bacalhau_a_bras.md) 
-- [Borscht](src/borscht.md)
+- [Bolo de Cenoura](src/bolo-de-cenoura.md) 🥕
+- [Bacalhau à Brás](src/bacalhau_a_bras.md) 🐟
+- [Borscht](src/borscht.md)🍲
 
 ## Descrição
 Os integrantes devem adicionar receitas em arquivos markdown ou HTML, utilizando boas práticas de versionamento com Git e GitHub.
