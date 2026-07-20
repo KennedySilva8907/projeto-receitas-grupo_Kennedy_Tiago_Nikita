@@ -72,8 +72,8 @@ tarefas de novas receitas), facilitando a leitura do quadro de trabalho.
 
 ## Pull Requests
 
-Foram abertos e integrados seis pull requests, todos com aprovação de outro elemento do grupo
-antes do merge.
+Foram abertos sete pull requests, todos com aprovação de outro elemento do grupo
+antes do merge. O último (#13) é o que integra este próprio relatório.
 
 | PR | Título | Autor |
 |---|---|---|
@@ -83,6 +83,7 @@ antes do merge.
 | #11 | docs: adicionar indice de receitas no README (closes #4) | Tiago |
 | #10 | feat: implementar estilo da página (closes #5) | Nikita |
 | #12 | Fix/caminho receita bacalhau | Tiago |
+| #13 | docs: preencher relatorio final (closes #6) | Kennedy |
 
 O processo de revisão não foi meramente formal. Em dois casos foram pedidas alterações antes
 da aprovação, usando a opção **Request changes** do GitHub:
