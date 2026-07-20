@@ -1,2 +1,394 @@
-<!-- Página inicial do projeto -->
-<h1>Página Colaborativa de Receitas</h1>
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Colaborativa de Receitas</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #f6efe7;
+            --bg-alt: #fffaf4;
+            --text: #2d221a;
+            --muted: #6f6257;
+            --primary: #d96b2b;
+            --primary-dark: #b14f17;
+            --accent: #2f7d6d;
+            --card: rgba(255, 255, 255, 0.84);
+            --border: rgba(100, 72, 52, 0.14);
+            --shadow: 0 18px 40px rgba(60, 34, 15, 0.12);
+            --radius: 24px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(217, 107, 43, 0.16), transparent 34%),
+                radial-gradient(circle at right 15%, rgba(47, 125, 109, 0.14), transparent 28%),
+                linear-gradient(180deg, var(--bg) 0%, var(--bg-alt) 100%);
+            min-height: 100vh;
+        }
+
+        .page {
+            width: min(1120px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 32px 0 56px;
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 44px;
+            border: 1px solid var(--border);
+            border-radius: calc(var(--radius) + 10px);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.88), rgba(255, 248, 240, 0.72));
+            box-shadow: var(--shadow);
+            isolation: isolate;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: auto -80px -120px auto;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(217, 107, 43, 0.18), transparent 68%);
+            z-index: -1;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(47, 125, 109, 0.11);
+            color: var(--accent);
+            font: 700 0.82rem/1.1 Arial, Helvetica, sans-serif;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        h1 {
+            margin: 18px 0 14px;
+            font-size: clamp(2.5rem, 5vw, 4.8rem);
+            line-height: 0.95;
+            letter-spacing: -0.05em;
+            max-width: 10ch;
+        }
+
+        .lead {
+            margin: 0;
+            max-width: 62ch;
+            font: 400 1.08rem/1.8 Arial, Helvetica, sans-serif;
+            color: var(--muted);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 18px;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            text-decoration: none;
+            font: 700 0.95rem/1 Arial, Helvetica, sans-serif;
+            transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+        }
+
+        .button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 28px rgba(60, 34, 15, 0.12);
+        }
+
+        .button.primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .button.primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .button.secondary {
+            background: rgba(255, 255, 255, 0.86);
+            color: var(--text);
+            border-color: var(--border);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 26px;
+        }
+
+        .stat {
+            padding: 18px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid var(--border);
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 1.45rem;
+            line-height: 1.1;
+        }
+
+        .stat span {
+            display: block;
+            margin-top: 6px;
+            font: 400 0.95rem/1.5 Arial, Helvetica, sans-serif;
+            color: var(--muted);
+        }
+
+        .section {
+            margin-top: 28px;
+        }
+
+        .section-head {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 16px;
+            margin: 34px 4px 18px;
+        }
+
+        .section-head h2 {
+            margin: 0;
+            font-size: clamp(1.4rem, 2vw, 2rem);
+            letter-spacing: -0.03em;
+        }
+
+        .section-head p {
+            margin: 0;
+            max-width: 42ch;
+            font: 400 0.98rem/1.6 Arial, Helvetica, sans-serif;
+            color: var(--muted);
+        }
+
+        .recipes {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .recipe-card {
+            padding: 26px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background: var(--card);
+            box-shadow: 0 14px 34px rgba(74, 47, 23, 0.08);
+            backdrop-filter: blur(10px);
+        }
+
+        .recipe-card.featured {
+            background: linear-gradient(180deg, rgba(255, 248, 240, 0.94), rgba(255, 255, 255, 0.8));
+        }
+
+        .recipe-card h3 {
+            margin: 0 0 10px;
+            font-size: 1.5rem;
+            letter-spacing: -0.03em;
+        }
+
+        .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 0 0 18px;
+            padding: 0;
+            list-style: none;
+            font: 700 0.82rem/1 Arial, Helvetica, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent);
+        }
+
+        .meta li {
+            padding: 8px 10px;
+            border-radius: 999px;
+            background: rgba(47, 125, 109, 0.08);
+        }
+
+        .recipe-card p {
+            margin: 0;
+            color: var(--muted);
+            font: 400 1rem/1.75 Arial, Helvetica, sans-serif;
+        }
+
+        .recipe-card .card-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .note {
+            margin-top: 22px;
+            padding: 18px 20px;
+            border-left: 4px solid var(--primary);
+            border-radius: 16px;
+            background: rgba(217, 107, 43, 0.08);
+            font: 400 0.98rem/1.7 Arial, Helvetica, sans-serif;
+            color: var(--text);
+        }
+
+        footer {
+            margin-top: 26px;
+            padding: 16px 4px 0;
+            font: 400 0.92rem/1.6 Arial, Helvetica, sans-serif;
+            color: var(--muted);
+        }
+
+        @media (max-width: 860px) {
+            .hero {
+                padding: 28px;
+            }
+
+            .stats,
+            .recipes {
+                grid-template-columns: 1fr;
+            }
+
+            .section-head {
+                align-items: start;
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .page {
+                width: min(100% - 20px, 1120px);
+                padding: 20px 0 36px;
+            }
+
+            .hero {
+                padding: 22px;
+            }
+
+            h1 {
+                max-width: none;
+            }
+
+            .button {
+                width: 100%;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="page">
+        <section class="hero" aria-labelledby="title">
+            <p class="eyebrow">Projeto colaborativo</p>
+            <h1 id="title">Página Colaborativa de Receitas</h1>
+            <p class="lead">
+                Um ponto de encontro simples e elegante para guardar, partilhar e descobrir receitas do grupo.
+                Aqui tens uma vista rápida das receitas em destaque e acesso direto aos ficheiros completos.
+            </p>
+            <div class="hero-actions">
+                <a class="button primary" href="#receitas">Ver receitas</a>
+                <a class="button secondary" href="bolo-de-cenoura.md">Abrir bolo de cenoura</a>
+            </div>
+
+            <div class="stats" aria-label="Resumo do projeto">
+                <div class="stat">
+                    <strong>2</strong>
+                    <span>receitas organizadas</span>
+                </div>
+                <div class="stat">
+                    <strong>1</strong>
+                    <span>página inicial centralizada</span>
+                </div>
+                <div class="stat">
+                    <strong>100%</strong>
+                    <span>conteúdo local e leve</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="receitas" aria-labelledby="recipes-title">
+            <div class="section-head">
+                <div>
+                    <h2 id="recipes-title">Receitas em destaque</h2>
+                    <p>Uma apresentação mais clara para navegar rapidamente entre os pratos do projeto.</p>
+                </div>
+            </div>
+
+            <div class="recipes">
+                <article class="recipe-card featured">
+                    <h3>Bolo de cenoura</h3>
+                    <ul class="meta" aria-label="Informações da receita">
+                        <li>45 min</li>
+                        <li>10 fatias</li>
+                        <li>Doce</li>
+                    </ul>
+                    <p>
+                        Clássico caseiro com massa fofa e cobertura de chocolate. Ideal para um lanche rápido ou para
+                        levar a uma partilha.
+                    </p>
+                    <div class="card-actions">
+                        <a class="button primary" href="bolo-de-cenoura.md">Abrir receita</a>
+                    </div>
+                </article>
+
+                <article class="recipe-card">
+                    <h3>Borscht</h3>
+                    <ul class="meta" aria-label="Informações da receita">
+                        <li>60 min</li>
+                        <li>4 a 6 doses</li>
+                        <li>Sopa</li>
+                    </ul>
+                    <p>
+                        Uma sopa vibrante de beterraba com legumes, carne e creme ácido, perfeita para uma refeição
+                        reconfortante.
+                    </p>
+                    <div class="card-actions">
+                        <a class="button primary" href="borscht.md">Abrir receita</a>
+                    </div>
+                </article>
+            </div>
+
+            <div class="note">
+                Dica: se quiseres evoluir este projeto, o próximo passo natural é converter cada receita em uma página
+                HTML própria e ligar tudo a partir daqui.
+            </div>
+        </section>
+
+        <footer>
+            Feito para o grupo Kennedy, Tiago e Nikita.
+        </footer>
+    </main>
+</body>
+
+</html>
