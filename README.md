@@ -18,7 +18,7 @@ Este projeto tem como objetivo criar uma página colaborativa com receitas compa
 
 ## Receitas 
 - [Bolo de Cenoura](src/bolo-de-cenoura.md) 🥕
-- [Bacalhau à Brás](src/bacalhau_a_bras.md) 🐟
+- [Bacalhau à Brás](src/receita_bacalhau_a_bras.md) 🐟
 - [Borscht](src/borscht.md)🍲
 
 ## Descrição
